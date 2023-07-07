@@ -20,6 +20,7 @@ const contactSchema = new Schema({
   },
 },
 { versionKey: false, timestamps: true });
+
 contactSchema.post('save', handleMongooseError);
 
 
@@ -31,7 +32,7 @@ const addSchema = Joi.object({
 });
 
 const updateFavoriteSchema = Joi.object({
-  favorite: Joi.boolean().required(),
+  favorite: Joi.boolean().required().messages({ 'any.required': 'Missing field favorite' }),
 });
 
 const schemas = {
@@ -44,5 +45,7 @@ const Contact = model("contact", contactSchema);
 
 
 
-module.exports = {Contact,
-schemas};
+module.exports = {
+  Contact,
+schemas,
+};
