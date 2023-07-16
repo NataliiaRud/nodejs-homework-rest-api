@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 const { handleMongooseError } = require("../helpers");
 const Joi = require('joi');
 
-const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const emailRegexp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 
 const userSchema = new Schema(
@@ -26,6 +26,10 @@ const userSchema = new Schema(
         token: {
             type: String,
             default: '',
+          },
+          avatarUrl: {
+            type: String,
+            required: true,
           },
       },
       { versionKey: false, timestamps: true }
