@@ -89,11 +89,11 @@ const updateAvatar = async(req, res)=> {
   image.resize(250, 250).write(tempUpload);
   
   await fs.rename(tempUpload, resultUpload);
-  const avatarURL = path.join("avatars", filename);
-  await User.findByIdAndUpdate(_id, {avatarURL});
+  const avatarUrl = path.join("avatars", filename);
+  await User.findByIdAndUpdate(_id, {avatarUrl});
 
   res.json({
-      avatarURL,
+      avatarUrl,
   })
 }
 
