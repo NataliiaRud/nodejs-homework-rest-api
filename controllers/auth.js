@@ -19,12 +19,12 @@ const register = async(req, res)=>{
         throw HttpError(409, "Email in use");
       }
       const hashPassword = await bcrypt.hash(password, 10);
-      const avatarUrl = gravatar.url(email);
+      const avatarURL = gravatar.url(email);
 
-const newUser = await User.create({...req.body, password: hashPassword, subscription, avatarUrl});
+const newUser = await User.create({...req.body, password: hashPassword, subscription, avatarURL});
 res.status(201).json( {email: newUser.email,
     subscription: newUser.subscription,
-    avatarUrl,
+    avatarURL,
   })
 }
 
@@ -89,11 +89,11 @@ const updateAvatar = async(req, res)=> {
   image.resize(250, 250).write(tempUpload);
   
   await fs.rename(tempUpload, resultUpload);
-  const avatarUrl = path.join("avatars", filename);
-  await User.findByIdAndUpdate(_id, {avatarUrl});
+  const avatarURL = path.join("avatars", filename);
+  await User.findByIdAndUpdate(_id, {avatarURL});
 
   res.json({
-      avatarUrl,
+      avatarURL,
   })
 }
 
